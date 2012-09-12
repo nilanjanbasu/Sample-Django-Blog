@@ -3,17 +3,28 @@
 <HTML>
    <HEAD>
       <TITLE>Log In</TITLE>
-   </HEAD>
-   <style type="text/css">
-	   <link rel="stylesheet" type="text/css" href="css/base.css">
+      <style type="text/css">
+	   html, body {
+		   background-color: #334873;
+		   background-image: url({{STATIC_URL}}img/bg.png);
+		   margin-left: 15px;
+		}
    </style>
+   </HEAD>
    <BODY>
-      <form action="" method="post" id="login_form">
+	<div id="container">
+	  <div id="leftpane">
+		<img id="logo" src="{{ STATIC_URL }}img/logo_3.png" alt="Logo">	  
+	  </div>
+	  <div id="rightpane">
+		<form action="" method="post" id="login_form">
 		  {% for field in login_form %}
 		  <p>{{field.label_tag}}:{{field}}
 		  {{field.errors}}</p>
 		  {% endfor %}   
 		  <input type="submit" value="Log In"> 
-      </form>
+		</form>  
+	  </div>     
+	 </div> 
    </BODY>
 </HTML>

@@ -4,6 +4,7 @@ import myblog.insta_blog.forms.login as login_form
 from django.shortcuts import render_to_response
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponseRedirect,HttpResponse
+from django.template import RequestContext
 
 def login_serve(request):
 	f = login_form.LoginForm()
@@ -20,7 +21,7 @@ def login_serve(request):
 			login(request,user)
 			return HttpResponseRedirect('/logged_in/') #TODO Replace by something real!
 			
-	return render_to_response('login_template.html',{ 'login_form': f})
+	return render_to_response('login_template.html',{ 'login_form': f},context_instance=RequestContext(request))
 
 def logged_in_message(request):
 	name = 'Unknown User'
