@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+   <HEAD>
+      <TITLE>{% block title %}Mindlog{% endblock %}</TITLE>
+      <style type="text/css">
+		
+		html body{
+					margin: 0 0 0 0;
+					background-color:#E8DBA7/*#C7C8CA*/;
+					font-family: Arial,Helvetica,sans-serif;
+					text-align: justify;
+		}
+	    #header {
+					margin-bottom: 0px ;
+		}
+	    
+		#logo {
+			margin-top:0px;
+			margin-bottom:0px;
+			position:relative;
+			top:0px;
+			left:0px;
+			background-color:#394E79;
+			padding-top:3px;
+		}
+		#blog_panel {
+			margin-top: 0px;
+		}
+		#blog_panel h1{
+			font-family: Verdana, sans-serif;
+			color:#7F0000;
+			text-align:center;
+		}
+		
+		#contentpane{
+			padding:0px 30px 0px 30px;
+		}
+		#main_content {
+			width: 80%;
+			float:left;
+			margin-right:3%;
+			background-color: #FFF9EE;
+		}
+		#sidebar {
+			width: 17%;
+			float:right;
+			text-align:center;
+			background-color: #FFF9EE;
+		}	
+		
+		a {
+			color: #CC6B47;
+			text-decoration:none;
+		}
+		a:hover{
+			color: #394E79;
+			text-decoration:underline;
+		}
+		
+	  
+		  {% block css_style %}{% endblock %} </style>
+	</HEAD>
+	<BODY>
+		<div id="container">
+			<div id="header">
+				<h1 id="logo">			
+					<a href=""><img id="img_logo" src="{{STATIC_URL}}img/logo_small.png"></a>
+				</h1>
+				{% block nav_section %}{% endblock %}
+			</div>
+			<div id="blog_panel">
+				{% block blog_head %}{% endblock %}
+			</div>
+			<div id="contentpane">
+				<div id="main_content">
+					{% block content %}{% endblock %}
+				</div>
+				<div id="sidebar">
+					{% block sidebar %}{% endblock %}		
+				</div>			
+			</div>
+			<div id="footer">
+			</div>
+		</div>
+	</BODY>
+</HTML>

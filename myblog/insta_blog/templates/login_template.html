@@ -8,7 +8,49 @@
 		   background-color: #334873;
 		   background-image: url({{STATIC_URL}}img/bg.png);
 		   margin-left: 15px;
+		}	
+		
+	   #container {
+		   position: relative;
+		   clear:left;
+		   left: 0px;
+		   top: 0px;
+		   min-width:800px;
+		   min-height: 200px;
+		   margin-top: 150px;
+<!--
+		   border: 3px solid #C7C8CA;
+-->
+		   
+	   }
+	   #leftpane {
+		   position:absolute;
+		   left:0px;
+		   top:0px;
+		   width: 70%;
+		   margin-right: -10px;
+		   overflow:hidden;
 		}
+		#rightpane {
+			position:absolute;
+			right:0px;
+			top:0px;
+			width: 30%;
+			margin-top: 40px;
+		}
+		#leftpane img {
+			width: 80%;
+			height: 50%%;
+			margin:auto;
+		}
+		#rightpane form {
+			margin-top: 60px;
+			color: #C7C8CA;
+		}
+		.errorlist {
+			color:red;
+		}
+		   
    </style>
    </HEAD>
    <BODY>
@@ -18,10 +60,15 @@
 	  </div>
 	  <div id="rightpane">
 		<form action="" method="post" id="login_form">
-		  {% for field in login_form %}
-		  <p>{{field.label_tag}}:{{field}}
-		  {{field.errors}}</p>
-		  {% endfor %}   
+		  {% if error_message %}
+			{% for e in error_message %}
+				<div="err">{{e}}</p>
+			{% endfor %}
+		  {% endif %}
+		  <p><label for="id_username">Username</label>:<input id="id_username" type="text" name="username" value={{u_name}}></p>
+		  <p><label for="id_password">Password</label>:<input type="password" name="password" id="id_password" value={{pswd}}></p>
+		  <p><input type="checkbox" name="create_new"> Create a new account</p>
+		  </ul>
 		  <input type="submit" value="Log In"> 
 		</form>  
 	  </div>     

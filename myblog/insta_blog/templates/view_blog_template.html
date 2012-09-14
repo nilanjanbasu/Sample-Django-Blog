@@ -1,0 +1,52 @@
+{% extends "blog_theme_base.html" %}
+
+{% block title %} This page | {{block.super}} {% endblock %}
+
+{% block css_style %} 
+
+#article_wrap *{
+	margin: 0;
+	margin-left:10px;
+	padding: 0;
+}
+#article_wrap h2,p,a {
+	margin: 0;
+}
+#article_wrap h2 {
+	clear: both;
+	font-size:1.4em;
+	font-weight: normal;
+}
+#date{
+	font-size:.35em;
+	font-weight:normal;
+	color:black;
+	text-transform: uppercase;
+	padding-top:12px;
+}	
+#article_wrap p{
+	padding-left: 10px;
+	padding-top: 10px;
+}
+#entry_wrap {
+	border-left: 5px solid #E8DBA7;
+	border-bottom: 5px solid #E8DBA7;
+}
+{% endblock %}						
+
+{% block blog_head %}<h1>{{username|capfirst}}'s Blog</h1>{% endblock %} 
+
+{% block content %}
+{%if articles %}
+	<div id="article_wrap">
+		{% for entry in articles %}
+			<div id="entry_wrap">
+				<h2><a href="{{entry.get_absolute_url}}">{{entry.title}}</a><span id="date">Posted on {{entry.time_posted  }}</span></h2>
+				<p>{{entry.raw_snippet}}</p>
+			</div>
+		{% endfor %}	
+	</div>	
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}<p>Sample Sidebar</p>{% endblock %}
