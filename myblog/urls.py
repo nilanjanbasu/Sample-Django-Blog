@@ -14,8 +14,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/',include('insta_blog.urls')),
-    url(r'^logged_in/$','insta_blog.views.logged_in_message'),
+    url(r'^login/$','insta_blog.views.login_serve',name='login_page'),
+    url(r'^logout/$','insta_blog.views.log_out_serve',name='logout_page'),
+    url(r'^user/(?P<user_name>[^/]+)/$','insta_blog.views.profile_view',name='profile_view'),
+    url(r'^user/(?P<user_name>[^/]+)/edit/(?P<article_slug>[^/]+)/$','insta_blog.views.article_edit',name='article_edit'), #a '/' in article will intriduce bugs (FIX)
+    url(r'^user/(?P<user_name>[^/]+)/delete/(?P<article_slug>[^/]+)/$','insta_blog.views.article_delete',name='article_delete'),
+    url(r'^user/(?P<user_name>[^/]+)/new/$','insta_blog.views.article_new',name='new_article'),
     url(r'^blog/(?P<blog_name>[^/]+)/(?P<page_number>\d+)/$','insta_blog.views.view_all_articles_by_user'),    
     url(r'^blog/(?P<blog_name>[^/]+)/(?P<pg_name>[^/]+)/$','insta_blog.views.view_particular_blogpage'),
 )

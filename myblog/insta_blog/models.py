@@ -2,11 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 from datetime import datetime
 from markdown import markdown
+from lxml.html.clean import clean_html
 # Create your models here.
 
 class AuthorManager(models.Manager):
 	def user_articles(self,username):
-		return self.filter(author__username=username)#.order_by('-time_posted')
+		return self.filter(author__username=username).order_by('-time_posted')
 
 class Article(models.Model):
 	
@@ -42,7 +43,7 @@ class Article(models.Model):
 		return self.title
 	
 	def save(self,force_insert=False,force_update=False):
-		self.content_html = markdown(self.raw_content)
+		self.content_html = clean_html(markdown( self.raw_content ))
 		super(Article,self).save(force_insert,force_update)
 		
 	@models.permalink	
@@ -51,5 +52,3 @@ class Article(models.Model):
 								{'blog_name':self.author.username,
 								 'pg_name' : self.slug
 								 })
-	
-	

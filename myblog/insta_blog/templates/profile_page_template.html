@@ -1,0 +1,68 @@
+{% extends "blog_theme_base.html" %}
+
+{% block title %} {{username|capfirst}}:Profile {{block.super}} {% endblock %}
+
+{% block css_link %}
+{{block.super}}
+<LINK href="{{STATIC_URL}}css/content.css" rel="stylesheet" type="text/css"> 
+{% endblock %}
+{% block css_style %}
+
+#sidebar {
+	padding-top:20px;
+	min-height:40px;
+	font-size: 1.2em;
+}
+
+#section_header {
+	margin:10px 10px 10px 10px;
+}
+#section_header > h2{
+	margin:0;
+	color:#9B7A67;
+}
+#entry_wrap {
+	border-top: 5px solid #E8DBA7;
+	
+#no_article_error p{
+	margin: 20px;
+	padding: 10px;
+	text-align:center;
+}
+
+{% endblock %}
+
+{% block content %}
+{% if gt_than_zero %}
+		{%if article_drafts %}
+		<div id="section_header">
+			<h2>Article Drafts:</h2>
+		</div>
+			<div id="article_wrap">
+				{% for entry in article_drafts %}
+					<div id="entry_wrap">
+						<h2><a class="article_title" href="{{entry.edit_url}}">{{entry.title}}</a><span class="date">Last Modified on {{entry.date}}</span></h2>
+					</div>
+				{% endfor %}	
+			</div>	
+		{% endif %}
+		{%if article_published %}
+		<div id="section_header">
+			<h2>All Published Articles:</h2>
+		</div>
+			<div id="article_wrap">
+				{% for entry in article_published %}
+					<div id="entry_wrap">
+						<h2><a class="article_title" href="{{entry.url}}">{{entry.title}}</a><span class="date">Last Modified on {{entry.time_posted}}</span></h2>
+						<p style="font-size:.8em;margin:0px 0px 4px 0px; padding-top:4px;"><a href="{{entry.edit_link}}">Edit</a><a href="{{entry.delete_link}}">Delete</a></p>
+					</div>
+				{% endfor %}
+			</div>	
+
+		{% endif %}
+{% else %}
+	<p id="no_article_error" style=""> You have not written any articles yet.</p>
+{% endif %}
+{% endblock %}
+{% block sidebar %}<p><a id="button" href="{{new_button_link}}">Create New</a></p>{% endblock %}
+

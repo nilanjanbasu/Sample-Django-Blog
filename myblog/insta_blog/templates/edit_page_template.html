@@ -1,0 +1,49 @@
+
+{% extends "blog_theme_base.html" %}
+
+{% block title %} {{username|capfirst}}:Edit {{block.super}} {% endblock %}
+
+{% block css_link %}
+{{block.super}}
+<LINK href="{{STATIC_URL}}css/content.css" rel="stylesheet" type="text/css"> 
+{% endblock %}
+
+{% block css_style %}
+
+#sidebar {
+	padding-top:20px;
+	min-height:40px;
+	font-size: 1.2em;
+}
+
+#section_header {
+	margin:10px 10px 10px 10px;
+}
+#section_header > h2{
+	margin:0;
+	color:#9B7A67;
+}
+#entry_wrap {
+	border-top: 5px solid #E8DBA7;
+	
+#no_article_error p{
+	margin: 20px;
+	padding: 10px;
+	text-align:center;
+} /*Duplicate CSS from profile_page_template, TODO: remove*/
+#edit_form {
+	margin:20px;
+	padding: 5px;
+}
+{% endblock %}
+{% block content %}
+<form id="edit_form" method="post" action="">
+	<table>
+		{{form}}
+	</table>
+	<input type="submit" value="Save">
+</form>
+
+{% endblock %}
+
+{% block sidebar %}<p><a id="button" href="{{new_button_link}}">Create New</a></p>{% endblock %}

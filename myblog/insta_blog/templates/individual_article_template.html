@@ -1,13 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-<HTML>
-   <HEAD>
-      <TITLE>Log In</TITLE>
-   </HEAD>
-   <BODY>
-			{% if p %}
-				<p><a href={{p.get_absolute_url}}>{{p.title}}:</a><br></p>{{p.content_html|safe}}
-			{% endif %}
-   </BODY>
-</HTML>
+{% extends "blog_theme_base.html" %}
 
+{% block title %} | {{block.super}} {% endblock %}
+
+{% block css_link %}
+{{block.super}}
+<LINK href="{{STATIC_URL}}css/content.css" rel="stylesheet" type="text/css">
+<LINK href="{{STATIC_URL}}css/individual_blog_page.css" rel="stylesheet" type="text/css"> 
+{% endblock %}	
+
+{% block css_style %}
+
+#content_title {
+	font-size:1.5em;
+}
+#entry_wrap > h2 {
+	padding-bottom: 10px;
+}
+
+#user_content {
+	padding-left:5px;
+}
+#user_content ol, #user_content ul {
+	padding-left:30px;
+}
+#user_content p,h1,h2,h3,h4 {
+	padding: 5px 0px 5px 0
+}
+{% endblock %} 				 
+
+{% block content %}
+{%if p %}
+	<div id="article_wrap">
+			<div id="entry_wrap">
+				<h2><a id="content_title" href="{{entry.get_absolute_url}}">{{p.title}}</a><span class="date">Posted on {{p.time_posted  }}</span></h2>
+			</div>
+			<div id="user_content">
+				<p>{{p.content_html|safe}}</p>			
+			</div>
+	</div>	
+{% endif %}
+{% endblock %}
+
+{% block sidebar %}<p>Sample Sidebar</p>{% endblock %}
