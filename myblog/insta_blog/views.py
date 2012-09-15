@@ -166,7 +166,7 @@ def profile_view(request,user_name):
 		return render_with_navlist(request,'profile_page_template.html',{'new_button_link':link,'gt_than_zero':articles_are_there,'article_drafts':l,'article_published':published_article,'username':user_name},
 																									context_instance=RequestContext(request))
 	else:
-		raise Http404
+		return HttpResponseRedirect(get_new_button_link('profile_view',{'user_name':request.user.username}))
 
 @login_required
 def article_edit(request,user_name,article_slug):
