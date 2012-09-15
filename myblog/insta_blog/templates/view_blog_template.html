@@ -6,7 +6,13 @@
 {{block.super}}
 <LINK href="{{STATIC_URL}}css/content.css" rel="stylesheet" type="text/css"> 
 {% endblock %}						
-
+{% block css_style %}
+#no_article_error p{
+	margin: 20px;
+	padding: 10px;
+	text-align:center;
+}
+{% endblock %}
 
 {% block content %}
 {%if articles %}
@@ -17,8 +23,10 @@
 				<p>{{entry.raw_snippet}}</p>
 			</div>
 		{% endfor %}	
-	</div>	
+	</div>
+{% else %}
+<p id="no_article_error" style=""> {{username|capfirst}} has not written any articles yet.</p>	
 {% endif %}
 {% endblock %}
 
-{% block sidebar %}<p>Sample Sidebar</p>{% endblock %}
+{% block sidebar %}<p>Archives</p>{% endblock %}

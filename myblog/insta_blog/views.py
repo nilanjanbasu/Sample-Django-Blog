@@ -102,19 +102,17 @@ def render_with_navlist(request,template_name,var_dict,context_instance):
 
 def view_all_articles_by_user(request,blog_name,page_number=1):
 	
-	pg = (int(page_number)-1)*10
+	#pg = (int(page_number)-1)*10          Disable partial view temporarily
 	try:
 		usr = User.objects.get(username=blog_name)
 	except User.DoesNotExist:
 		raise Http404
 	
-	articles = usr.article_set.all().filter(status=Article.LIVE)[pg:pg+10]
-	if len(articles) == 0:
-		raise Http404	
-	else:
-		return render_with_navlist(request,'view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
-		
-		#~ return render_to_response('view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
+	articles = usr.article_set.all().filter(status=Article.LIVE) #[pg:pg+10]
+	
+	return render_with_navlist(request,'view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
+	
+	#~ return render_to_response('view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
 	
 	
 def view_particular_blogpage(request,blog_name,pg_name):
@@ -227,4 +225,4 @@ def article_delete(request,user_name,article_slug):
 		return Http404
 		
 	Article.author_objects.user_articles(user_name).filter(slug = article_slug).delete();
-	return HttpResponseRedirect('/blog/%s/1/'%(user_name,))
+	return HttpResponseRedirect('/user/%s/'%(user_name,))
