@@ -100,6 +100,12 @@ def render_with_navlist(request,template_name,var_dict,context_instance):
 	var_dict['nav_bar_list'] = links_list
 	return render_to_response(template_name,var_dict,context_instance)
 
+def get_recent_articles(username,count=5):
+	
+	art = Article.author_objects.user_articles(username).filter(status=Article.LIVE)[:5]
+	
+	return art
+
 def view_all_articles_by_user(request,blog_name,page_number=1):
 	
 	#pg = (int(page_number)-1)*10          Disable partial view temporarily
@@ -109,11 +115,11 @@ def view_all_articles_by_user(request,blog_name,page_number=1):
 		raise Http404
 	
 	articles = usr.article_set.all().filter(status=Article.LIVE) #[pg:pg+10]
-	
-	return render_with_navlist(request,'view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
+	a = get_recent_articles(blog_name,5)
+	return render_with_navlist(request,'view_blog_template.html',{'articles':articles,'username':blog_name,'rec_arts':a},context_instance=RequestContext(request))
 	
 	#~ return render_to_response('view_blog_template.html',{'articles':articles,'username':blog_name},context_instance=RequestContext(request))
-	
+			
 	
 def view_particular_blogpage(request,blog_name,pg_name):
 	
@@ -125,7 +131,8 @@ def view_particular_blogpage(request,blog_name,pg_name):
 		art = Article.author_objects.user_articles(blog_name).filter(slug=pg_name)
 		if len(art) == 0 :
 			raise Http404	
-		return render_with_navlist(request,'individual_article_template.html',{'p':art[0],'username':blog_name},context_instance=RequestContext(request))
+		a = get_recent_articles(blog_name,5)
+		return render_with_navlist(request,'individual_article_template.html',{'p':art[0],'username':blog_name,'rec_arts':a},context_instance=RequestContext(request))
 				
 	except User.DoesNotExist:
 		raise Http404

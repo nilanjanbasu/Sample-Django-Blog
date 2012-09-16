@@ -12,6 +12,34 @@
 	padding: 10px;
 	text-align:center;
 }
+#sidebar {
+	text-align:center;
+}
+#sidebar_wrap{
+	padding:10px 10px;
+	text-align:center;
+}
+#sidebar_wrap p{
+	text-align:justify;
+	padding-top: 20px;
+	padding-left:20px;
+	color:#7F0610;
+	font-size:1.2em;
+	text-decoration:underline;
+}
+#sidebar_wrap ul{
+	padding:5px;
+	list-style:none outside none;
+	text-align:justify;
+	font-size:.9em;
+}
+#sidebar_wrap li{
+	padding-bottom:4px;
+	margin-left:15px;
+	margin-right:15px;
+	border-bottom: 2px solid #E8DBA7;
+}
+
 {% endblock %}
 
 {% block content %}
@@ -29,4 +57,22 @@
 {% endif %}
 {% endblock %}
 
-{% block sidebar %}<p>Archives</p>{% endblock %}
+{% block sidebar %}
+<div id="sidebar_wrap">
+<div id="twitter">
+<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="mindlog">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<p>Recent Articles</p>
+
+{% if rec_arts %}
+	<ul>
+	{% for a in rec_arts %}
+			<li><a href="{{a.get_absolute_url}}">{{ a.get_truncated_title }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+<p>No articles.</p>
+{% endif %}
+</div>
+{% endblock %}

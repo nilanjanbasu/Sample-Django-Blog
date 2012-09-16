@@ -51,7 +51,8 @@
 			color:red;
 		}
 		   
-   </style>
+   </style>  
+   
    </HEAD>
    <BODY>
 	<div id="container">
@@ -59,7 +60,7 @@
 		<img id="logo" src="{{ STATIC_URL }}img/logo_3.png" alt="Logo">	  
 	  </div>
 	  <div id="rightpane">
-		<form action="" method="post" id="login_form">
+		<form id="login" action="" method="post" id="login_form">
 		  {% if error_message %}
 			{% for e in error_message %}
 				<div="err">{{e}}</p>
@@ -67,7 +68,7 @@
 		  {% endif %}
 		  <p><label for="id_username">Username</label>:<input id="id_username" type="text" name="username" value={{u_name}}></p>
 		  <p><label for="id_password">Password</label>:<input type="password" name="password" id="id_password" value={{pswd}}></p>
-		  <p><input type="checkbox" name="create_new"> Create a new account</p>
+		  <p><input type="checkbox" id="check" name="create_new"> Create a new account</p>
 		  </ul>
 		  <input type="submit" value="Log In"> 
 		</form>  

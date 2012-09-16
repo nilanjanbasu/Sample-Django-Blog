@@ -52,3 +52,8 @@ class Article(models.Model):
 								{'blog_name':self.author.username,
 								 'pg_name' : self.slug
 								 })
+	def get_truncated_title(self):
+		if len(self.title) < 20:
+			return self.title
+		else:
+			return self.title[:20] + '...'
