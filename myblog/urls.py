@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^pampam/$', 'insta_blog.views.pampam',name='social_auth_redirect'),
     url(r'^$','insta_blog.views.login_serve'),
     url(r'^login/$','insta_blog.views.login_serve',name='login_page'),
     url(r'^logout/$','insta_blog.views.log_out_serve',name='logout_page'),
@@ -23,4 +24,5 @@ urlpatterns = patterns('',
     url(r'^user/(?P<user_name>[^/]+)/new/$','insta_blog.views.article_new',name='new_article'),
     url(r'^blog/(?P<blog_name>[^/]+)/(?P<page_number>\d+)/$','insta_blog.views.view_all_articles_by_user'),    
     url(r'^blog/(?P<blog_name>[^/]+)/(?P<pg_name>[^/]+)/$','insta_blog.views.view_particular_blogpage'),
+    url(r'', include('social_auth.urls')),
 )

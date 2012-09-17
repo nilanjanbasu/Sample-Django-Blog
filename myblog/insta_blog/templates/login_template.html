@@ -60,6 +60,10 @@
 		<img id="logo" src="{{ STATIC_URL }}img/logo_3.png" alt="Logo">	  
 	  </div>
 	  <div id="rightpane">
+		  
+		<p>Login with <a href="{% url socialauth_begin 'facebook' %}">Facebook</a></p>
+		<p>Login with <a href="{% url socialauth_begin 'twitter' %}">Twitter</a></p>
+		<br>
 		<form id="login" action="" method="post" id="login_form">
 		  {% if error_message %}
 			{% for e in error_message %}

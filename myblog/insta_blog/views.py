@@ -233,3 +233,16 @@ def article_delete(request,user_name,article_slug):
 		
 	Article.author_objects.user_articles(user_name).filter(slug = article_slug).delete();
 	return HttpResponseRedirect('/user/%s/'%(user_name,))
+	
+	
+############## TEst codes
+
+
+
+def pampam(request):
+	if request.method == 'GET':
+		print request.user
+	n = NavBarLinks('','profile_view',{'user_name':request.user.username},'')
+	return HttpResponseRedirect(n.get_absolute_url())
+	
+

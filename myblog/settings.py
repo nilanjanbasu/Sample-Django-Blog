@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'myblog.insta_blog',
+    'social_auth',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -154,4 +155,17 @@ LOGGING = {
 
 LOGIN_URL = '/login/'
 
+AUTHENTICATION_BACKENDS = (
+	'social_auth.backends.facebook.FacebookBackend',
+	'social_auth.backends.twitter.TwitterBackend',
+	'django.contrib.auth.backends.ModelBackend',
+)
+FACEBOOK_APP_ID              = '283643615081655'
+FACEBOOK_API_SECRET          = 'fe7a16cf0d59d579b43896bd48ff0227'
+TWITTER_CONSUMER_KEY         = 'eEWSxO5tVxNXiVg22XKJg'
+TWITTER_CONSUMER_SECRET      = '438V2eueCQOMBsmiYX5KbXgG1UlbwvEE9MEFPfsww'
 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/pampam/'
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_UUID_LENGTH = 16
