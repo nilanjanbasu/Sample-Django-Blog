@@ -13,8 +13,7 @@
 	   #container {
 		   position: relative;
 		   clear:left;
-		   left: 0px;
-		   top: 0px;
+		   
 		   min-width:800px;
 		   min-height: 200px;
 		   margin-top: 150px;
@@ -25,8 +24,8 @@
 	   }
 	   #leftpane {
 		   position:absolute;
-		   left:0px;
-		   top:0px;
+		   left:40px;
+		   top:50px;
 		   width: 70%;
 		   margin-right: -10px;
 		   overflow:hidden;
@@ -36,7 +35,7 @@
 			right:0px;
 			top:0px;
 			width: 30%;
-			margin-top: 40px;
+			margin-top: 10px;
 		}
 		#leftpane img {
 			width: 80%;
@@ -50,11 +49,25 @@
 		.errorlist {
 			color:red;
 		}
+		#errors *{
+			width:500px;
+			margin:auto;
+			padding-top:0px;
+			background-color:white;
+			margin-top:5px;
+		}
+		#errors p{
+			font-family:helvetica,sans-serif;
+			padding-left:20px;
+			margin-top:0px;
+		}
+			
 		   
    </style>  
-   
+   <script src="{{STATIC_URL}}_js/login.js" type="text/javascript" ></script>
    </HEAD>
    <BODY>
+	<div id="errors"></div>
 	<div id="container">
 	  <div id="leftpane">
 		<img id="logo" src="{{ STATIC_URL }}img/logo_3.png" alt="Logo">	  
@@ -67,15 +80,17 @@
 		<form id="login" action="" method="post" id="login_form">
 		  {% if error_message %}
 			{% for e in error_message %}
-				<div="err">{{e}}</p>
+				<p>{{e}}</p>
 			{% endfor %}
 		  {% endif %}
 		  <p><label for="id_username">Username</label>:<input id="id_username" type="text" name="username" value={{u_name}}></p>
 		  <p><label for="id_password">Password</label>:<input type="password" name="password" id="id_password" value={{pswd}}></p>
-		  <p><input type="checkbox" id="check" name="create_new"> Create a new account</p>
+		  <p><input type="checkbox" id="chk" value="0" name="create_new"> Create a new account</p>
+		  <p><label for="id_passwd_check">Retype Password</label>:<input type="password" id="id_passwd_check" value="" disabled="disabled"></p>
 		  </ul>
-		  <input type="submit" value="Log In"> 
-		</form>  
+		  <input type="submit" id="button" value="Log In"> 
+		</form>
+		
 	  </div>     
 	 </div> 
    </BODY>

@@ -36,6 +36,9 @@
 	padding: 5px;
 }
 {% endblock %}
+
+{% block jscript %} <script src="{{STATIC_URL}}_js/edit_form.js"></script>{% endblock %}
+
 {% block content %}
 <form id="edit_form" method="post" action="">
 	<table>
