@@ -26,7 +26,7 @@
 		   position:absolute;
 		   left:40px;
 		   top:50px;
-		   width: 70%;
+		   width: 60%;
 		   margin-right: -10px;
 		   overflow:hidden;
 		}
@@ -34,7 +34,7 @@
 			position:absolute;
 			right:0px;
 			top:0px;
-			width: 30%;
+			width: 40%;
 			margin-top: 10px;
 		}
 		#leftpane img {
@@ -61,6 +61,9 @@
 			padding-left:20px;
 			margin-top:0px;
 		}
+		#twitter {
+			background-color:white;
+		}
 			
 		   
    </style>  
@@ -74,8 +77,7 @@
 	  </div>
 	  <div id="rightpane">
 		  
-		<p>Login with <a href="{% url socialauth_begin 'facebook' %}">Facebook</a></p>
-		<p>Login with <a href="{% url socialauth_begin 'twitter' %}">Twitter</a></p>
+		<a id="twitter" href="{% url socialauth_begin 'twitter' %}"><img src="{{STATIC_URL}}/img/tw.png"></a>
 		<br>
 		<form id="login" action="" method="post" id="login_form">
 		  {% if error_message %}
@@ -83,12 +85,13 @@
 				<p>{{e}}</p>
 			{% endfor %}
 		  {% endif %}
-		  <p><label for="id_username">Username</label>:<input id="id_username" type="text" name="username" value={{u_name}}></p>
-		  <p><label for="id_password">Password</label>:<input type="password" name="password" id="id_password" value={{pswd}}></p>
-		  <p><input type="checkbox" id="chk" value="0" name="create_new"> Create a new account</p>
-		  <p><label for="id_passwd_check">Retype Password</label>:<input type="password" id="id_passwd_check" value="" disabled="disabled"></p>
-		  </ul>
-		  <input type="submit" id="button" value="Log In"> 
+		  <table>
+		  <tr><th><label for="id_username">Username</label></th><td><input id="id_username" type="text" name="username" value={{u_name}}></td></tr>
+		  <tr><th><label for="id_password">Password</label></th><td><input type="password" name="password" id="id_password" value={{pswd}}></td></tr>
+		  <tr><td><input type="checkbox" id="chk" value="0" name="create_new"> Create a new account</td></tr>
+		  <tr><th><label for="id_passwd_check">Retype Password</label></th><td><input type="password" id="id_passwd_check" value="" disabled="disabled"></td></tr>
+		  <tr><th><input type="submit" id="button" value="Log In"> </th></tr>
+		  </table>
 		</form>
 		
 	  </div>     
