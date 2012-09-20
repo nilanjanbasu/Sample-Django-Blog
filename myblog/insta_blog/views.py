@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,redirect
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect,HttpResponse,Http404
@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from insta_blog.blog_forms import ArticleForm
 from datetime import datetime
+from social_auth.utils import setting
 
 class LoginForm(ModelForm):
 	class Meta:
@@ -233,10 +234,23 @@ def article_delete(request,user_name,article_slug):
 		
 	Article.author_objects.user_articles(user_name).filter(slug = article_slug).delete();
 	return HttpResponseRedirect('/user/%s/'%(user_name,))
+
+def social_form(request):	
+	errors = []
+	if request.method == 'POST' and request.POST.get('username'):
+		username_input = request.POST['username']
+		if not User.objects.filter(username=username_input).exists():		
+			name = setting('SOCIAL_AUTH_PARTIAL_PIPELINE_KEY', 'partial_pipeline')
+			request.session['saved_username'] = username_input
+			backend = request.session[name]['backend']
+			return redirect('socialauth_complete', backend=backend)
+		else:
+			errors.append('Username already Exists.')
+
+	return render_to_response('social_login_form.html', {'errors':errors}, RequestContext(request))
 	
 	
 ############## TEst codes
-
 
 
 def pampam(request):
@@ -244,5 +258,4 @@ def pampam(request):
 		print request.user
 	n = NavBarLinks('','profile_view',{'user_name':request.user.username},'')
 	return HttpResponseRedirect(n.get_absolute_url())
-	
 

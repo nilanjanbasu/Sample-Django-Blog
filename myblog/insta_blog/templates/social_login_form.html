@@ -1,0 +1,47 @@
+{% extends "blog_theme_base.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block css_style %}
+#sidebar {
+		width: 0%;
+	}
+#main_content{
+	width:100%;
+	min-height: 500px;
+	background-color:#E8DBA7;
+	text-align:center;
+}
+#social_form {
+	background-color:#FFF9EE;
+	text-align:right;
+	width:450px;
+	margin:auto;
+	margin-top:200px;
+}
+#social_form > form {
+	width:90%;
+	margin:auto;
+}
+{% endblock %}
+
+{% block jscript %}
+<script src="{{STATIC_URL}}_js/social_form.js"></script>
+{% endblock %}
+
+{%block blog_head %} {% endblock %}
+{% block content %}
+{% if errors %}
+	{% for e in errors %}
+	<p style="background-color:white;">{{e}}</p>
+	{% endfor %}
+{% endif %}
+<div id="social_form">
+<form id="id_social_form" action="" method="post">
+<table>
+<tr><th><label for="id_username">Preferred Username</label></th><td><input id="id_username"	type="text" name="username" value=""></td></tr>
+<tr><th><input type="submit" value="Submit"></th></tr>
+</table>
+</form>
+</div>
+{% endblock %}

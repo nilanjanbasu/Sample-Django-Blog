@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     url(r'^pampam/$', 'insta_blog.views.pampam',name='social_auth_redirect'),
     url(r'^$','insta_blog.views.login_serve'),
     url(r'^login/$','insta_blog.views.login_serve',name='login_page'),
+    url(r'^login/form/$','insta_blog.views.social_form',name='social_form'),
     url(r'^logout/$','insta_blog.views.log_out_serve',name='logout_page'),
     url(r'^user/(?P<user_name>[^/]+)/$','insta_blog.views.profile_view',name='profile_view'),
     url(r'^user/(?P<user_name>[^/]+)/edit/(?P<article_slug>[^/]+)/$','insta_blog.views.article_edit',name='article_edit'), #a '/' in article will intriduce bugs (FIX)

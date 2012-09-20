@@ -5,10 +5,10 @@
       <TITLE>{% block title %}Mindlog{% endblock %}</TITLE>
 	    {% block css_link %} 
 			<LINK href="{{STATIC_URL}}css/base.css" rel="stylesheet" type="text/css"> 	    
-	    {% endblock %}
-	    {% block jscript %}{% endblock %}	    
+	    {% endblock %}    
 	    
 	    <style type="text/css">{% block css_style %}{% endblock %} </style>
+	    {% block jscript %}{% endblock %}	
 	</HEAD>
 	<BODY>
 		<div id="container">
